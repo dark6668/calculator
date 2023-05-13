@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="UTF-8">
+
+<head>
+  <style>
+
+  </style>
+</head>
+
+<body>
+  <h1>
+    <div id="output"></div>
+  </h1>
+  </p>
+  <p><button id="button0" onclick="numberDisplay('0'),daddy('')">0</button></p>
+  <button id="button1" onclick="numberDisplay('1'),daddy('')">1</button>
+  <button id="button2" onclick="numberDisplay('2'),daddy('')">2</button>
+  <button id="button3" onclick="numberDisplay('3'),daddy('')">3</button>
+  <p><button id="button4" onclick="numberDisplay('4'),daddy('')">4</button>
+    <button id="button5" onclick="numberDisplay('5'),daddy('')">5</button>
+    <button id="button6" onclick="numberDisplay('6'),daddy('')">6</button>
+  </p>
+  <button id="button7" onclick="numberDisplay('7'),daddy('')">7</button>
+  <button id="button8" onclick="numberDisplay('8'),daddy('')">8</button>
+  <button id="button9" onclick="numberDisplay('9'),daddy('')">9</button>
+  <p><button id="+" onclick="calculationOperations('+'),daddy('')">+</button>
+    <button id="-" onclick="calculationOperations('-'),daddy('')">-</button>
+    <button id="-" onclick="calculationOperations('x'),daddy('')">x</button>
+    <button id="-" onclick="calculationOperations(':'),daddy('')">:</button>
+    <button id="+" onclick="equal('=')">=</button>
+    <button id="speak" onclick="voice()">speak</button>
+    <button id="speak" onclick="cl()">clear </button>
+
+
+    <script>
+      function daddy(textOfTheNumber) {
+        let text = textOfTheNumber;
+        let utterance = new SpeechSynthesisUtterance(text);
+        utterance.pitch = 0.7;
+        window.speechSynthesis.speak(utterance);
+      }
+
+
+      function numberDisplay(n) {
+        document.getElementById('output').innerText += n
+
+
+      }
+
+
+      function calculationOperations(n) {
+        document.getElementById('output').innerText += n
+
+      }
+
+      function equal() {
+
+
+        let numbers = document.getElementById('output').innerText // 1 +1 
+        let operations = { '-': '-', ':': ':', 'x': 'x', '+': '+' }
+
+        for (let operat in operations) {
+          let locationInLoop = numbers.indexOf(operat)
+          if (locationInLoop >= 1) {
+
+            var location = locationInLoop;
+            break
+          }
+
+        }
+
+        let answer = numbers.slice(location, location + 1); // +,/,-,* //
+
+        switch (answer) {
+          case '+':
+            answer = parseInt(numbers.slice(0, location)) + parseInt(numbers.slice(location + 1));
+            break
+          case 'x':
+            answer = parseInt(numbers.slice(0, location)) * parseInt(numbers.slice(location + 1));
+            break
+          case '-':
+            answer = parseInt(numbers.slice(0, location)) - parseInt(numbers.slice(location + 1));
+            break
+          case ':':
+            answer = parseInt(numbers.slice(0, location)) / parseInt(numbers.slice(location + 1));
+            break
+          default: cl();
+
+
+        }
+
+        if (answer === NaN || answer === "") {
+          cl()
+        }
+        else {
+          document.getElementById('output').innerText += "=" + answer
+        }
+
+      }
+
+      function voice() {
+        let text = document.getElementById('output').innerText;
+        let utterance = new SpeechSynthesisUtterance(text);
+        utterance.pitch = 0.7;
+        window.speechSynthesis.speak(utterance);
+      }
+
+      function cl() {
+        document.getElementById('output').innerText = ''
+
+
+      }
+      for (let i = 1; i < 2;) {
+        let name = prompt("What Is Your name? ")
+        let password = Number(prompt(` Hi ${name}, What Is The Password? `))
+        if (name === "david" & password === 123) { alert("Right Password And Right Name!!"); i++ }
+        if (name === "david" & password != 123) {
+          alert(`Wrong Password, ${name} `)
+        }
+        if (name !== "david" & password === 123) {
+          alert(`Wrong Name, ${name} `)
+        }
+        else if (name !== "david" & password !== 123) { alert("Wrong Password And Wrong Name") }
+      }
+
+    </script>
+</body>
